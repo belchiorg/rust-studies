@@ -51,7 +51,10 @@ fn stats_file(file_dir: String) {
 }
 
 fn delete_file(file_dir: String) {
-
+    match env::current_dir() {
+        Ok(curr_dir) => fs::remove_dir(curr_dir.join(file_dir)).expect("Couldn't find file"),
+        Err(_) => panic!("Couldn't read file"),
+    };
 }
 
 fn main() {
